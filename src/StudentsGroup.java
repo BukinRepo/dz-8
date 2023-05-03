@@ -29,7 +29,7 @@ public class StudentsGroup {
         if(getStudents().contains(studentRemove)) {
             getStudents().removeIf(removeStudent -> removeStudent == studentRemove);
         } else {
-            System.out.println("no such student");
+            System.out.println("No such student");
         }
     }
 
@@ -38,7 +38,7 @@ public class StudentsGroup {
             Student newName = new Student(studentFirstName, studentLastName);
             getStudents().set(getStudents().indexOf(studentRename), newName);
         } else {
-            System.out.println("no such student");
+            System.out.println("No such student");
         }
     }
 
@@ -47,14 +47,26 @@ public class StudentsGroup {
             Student newStarostaName = new Student(starostaFirstName, starostaLastName);
             this.starosta = newStarostaName;
         } else {
-            System.out.println("no such starosta");
+            System.out.println("No such starosta");
         }
     }
 
-
-
-    public void newTask (String task){
+    public void newGroupTask (String task){
         groupTasks.add(task);
+        for(Student student : students){
+            student.addNewTask(task);
+        }
+        starosta.addNewTask(task);
+    }
+
+    public void taskCompleted (String task, Student student){
+        if(getStudents().contains(student)){
+            student.setTaskCompleted(task);
+        }else if(student == starosta){
+            starosta.setTaskCompleted(task);
+        }else{
+            System.out.println("No such student or starosta");
+        }
     }
 
 
